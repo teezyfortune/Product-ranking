@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "target": "es2016",
+      "module": "commonjs",
+      "outDir": "./dist/src/",
+      "rootDir": "./src",
+      "esModuleInterop": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "strict": true
+    },
+    "include": ["./src",
+  "src/config/dbcon.ts",
+  "./src/test/*.test.ts"]
+  }
+  

@@ -1,0 +1,39 @@
+{
+  "dependencies": {
+    "axios": "^1.6.7",
+    "body-parser": "^1.20.2",
+    "chai": "^5.0.3",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "mocha": "^10.2.0",
+    "mysql2": "^3.9.1",
+    "nodemon": "^3.0.3",
+    "sequelize": "^6.36.0",
+    "sequelize-cli": "^6.6.2",
+    "typescript": "^5.3.3"
+  },
+  "name": "product_rankin",
+  "version": "1.0.0",
+  "description": "seconf round interview",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --parallel -r ts-node/register src/test/*.test.ts",
+    "dev": "ts-node-dev ./index.ts",
+    "migrate:create": "npx sequelize-cli migration:generate --name",
+    "sequelize": "ts-node -r tsconfig-paths/register ./node_modules/.bin/sequelize",
+    "model:create": "npx sequelize-cli model:generate",
+    "migrate:up": "ts-node ./node_modules/.bin/sequelize db:migrate",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo"
+  },
+  "author": "Gabriel",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.3.11",
+    "@types/express": "^4.17.21",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.16",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0"
+  }
+}
