@@ -10,25 +10,23 @@ export const convertCurrency = async (currency: string, price: number) => {
 
 }
 
-export const fetchSingleProduct = async (id: any, currency: string = 'CAD'): Promise<any> => {
+export const fetchSingleProduct = async (id: any, currency?: string): Promise<any> => {
     try {
         let productDetails = await productModel.findOne({ where: { id } })
         let result = await productDetails?.increment({ productViewed: +1 })
-        if (typeof currency !== null) {
+        if (currency) {
             const originalPrice = result?.price as number
             let price = await convertCurrency(currency, originalPrice)
-            console.log({price: price.data.result})
-            return { ...result?.dataValues, price: price.data.result  };
+            return { ...result?.dataValues, price: price.data.result };
         }
         return result;
 
     } catch (e: any) {
-        console.log(e.response)
         throw new Error(e)
     }
 }
 
-export const fetchAllProducts = async (page: any, limit: any, currency: string = 'CAD' ): Promise<any> => {
+export const fetchAllProducts = async (page: any, limit: any, currency: string): Promise<any> => {
     try {
         page = page ?? 1
         limit = limit ?? 5
@@ -47,16 +45,16 @@ export const fetchAllProducts = async (page: any, limit: any, currency: string =
             order: [['productViewed', 'DESC']]
         });
         let products = rows.map(e => e.dataValues)
-       
-        if(  currency !==  "USD"){
 
-         products =  await Promise.all(rows.map( async e =>{
+        if (currency) {
 
-        const response = await convertCurrency(currency, e.price)
+            products = await Promise.all(rows.map(async e => {
 
-        return { ...e.dataValues, price: response.data.result }
-      } ))
-    }
+                const response = await convertCurrency(currency, e.price)
+
+                return { ...e.dataValues, price: response.data.result }
+            }))
+        }
         return {
             products,
             count,

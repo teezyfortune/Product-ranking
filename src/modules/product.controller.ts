@@ -17,7 +17,6 @@ export const findAllProduct = async (req: Request, res: Response) => {
         const data = await fetchAllProducts(req.query.page, req.query.limit, currency)
         return res.status(200).json({ status: 'success', message: 'Products retrived successfully', data });
     } catch (e) {
-        console.log(e)
         return res.status(500).json({ status: 'fail', message: 'Oops somethiing went wrong' })
     }
 }
